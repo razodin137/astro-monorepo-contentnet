@@ -2,25 +2,34 @@
 > YOUR-SITE-NAME@0.0.1 build
 > astro build
 
-[1G[0K[2m23:54:54[22m [34m[types][39m Generated [2m37ms[22m
-[2m23:54:54[22m [34m[build][39m output: [34m"static"[39m
-[2m23:54:54[22m [34m[build][39m directory: [34m/home/bigboy/Documents/astro-monorepo-contentnet/apps/_site-template/dist/[39m
-[2m23:54:54[22m [34m[build][39m Collecting build info...
-[2m23:54:54[22m [34m[build][39m [32m✓ Completed in 45ms.[39m
-[2m23:54:54[22m [34m[build][39m Building static entrypoints...
-[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2m23:54:55[22m [34m[vite][39m [32m✓ built in 566ms[39m
-[2m23:54:55[22m [34m[build][39m [32m✓ Completed in 596ms.[39m
+[1G[0K[2m01:09:01[22m [34m[content][39m Syncing content
+[2m01:09:01[22m [34m[content][39m Synced content
+[2m01:09:01[22m [34m[types][39m Generated [2m28ms[22m
+[2m01:09:01[22m [34m[build][39m output: [34m"static"[39m
+[2m01:09:01[22m [34m[build][39m mode: [34m"static"[39m
+[2m01:09:01[22m [34m[build][39m directory: [34m/home/bigboy/Documents/astro-monorepo-contentnet/apps/_site-template/dist/[39m
+[2m01:09:01[22m [34m[build][39m Collecting build info...
+[2m01:09:01[22m [34m[build][39m [32m✓ Completed in 43ms.[39m
+[2m01:09:01[22m [34m[build][39m Building static entrypoints...
+[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2K[1G[2m01:09:02[22m [34m[vite][39m [32m✓ built in 937ms[39m
+[2m01:09:02[22m [34m[build][39m [32m✓ Completed in 965ms.[39m
 
 [42m[30m generating static routes [39m[49m
-[2m23:54:55[22m [32m▶[39m src/pages/about.md
-[2m23:54:55[22m   [34m└─[39m [2m/about/index.html[22m [2m(+14ms)[22m
-[2m23:54:55[22m [32m▶[39m src/pages/legal.md
-[2m23:54:55[22m   [34m└─[39m [2m/legal/index.html[22m [2m(+3ms)[22m
-[2m23:54:55[22m [32m▶[39m src/pages/index.astro
-[2m23:54:55[22m   [34m└─[39m [2m/index.html[22m🤖 Fetching content for tag: #SITE-EXAMPLE-TAG
- [31m(+5.45s)[39m
-[2m23:55:00[22m [32m✓ Completed in 5.51s.
+[2m01:09:02[22m [32m▶[39m src/pages/about.mdx
+[2m01:09:02[22m   [34m└─[39m [2m/about/index.html[22m [2m(+12ms)[22m 
+[2m01:09:02[22m [32m▶[39m src/pages/blog.astro
+[2m01:09:02[22m   [34m└─[39m [2m/blog/index.html[22m🤖 Fetching content for tag: #SITE-EXAMPLE-TAG
+ [31m(+687ms)[39m 
+[2m01:09:02[22m [32m▶[39m src/pages/contact.astro
+[2m01:09:02[22m   [34m└─[39m [2m/contact/index.html[22m [2m(+2ms)[22m 
+[2m01:09:02[22m [32m▶[39m src/pages/features.mdx
+[2m01:09:02[22m   [34m└─[39m [2m/features/index.html[22m [2m(+2ms)[22m 
+[2m01:09:02[22m [32m▶[39m src/pages/legal.mdx
+[2m01:09:02[22m   [34m└─[39m [2m/legal/index.html[22m [2m(+3ms)[22m 
+[2m01:09:02[22m [32m▶[39m src/pages/index.mdx
+[2m01:09:02[22m   [34m└─[39m [2m/index.html[22m [2m(+2ms)[22m 
+[2m01:09:02[22m [32m✓ Completed in 748ms.
 [39m
-[2m23:55:00[22m [34m[build][39m 3 page(s) built in [1m6.16s[22m
-[2m23:55:00[22m [34m[build][39m [1mComplete![22m
+[2m01:09:02[22m [34m[build][39m 6 page(s) built in [1m1.76s[22m
+[2m01:09:02[22m [34m[build][39m [1mComplete![22m
 [1G[0K⠙[1G[0K

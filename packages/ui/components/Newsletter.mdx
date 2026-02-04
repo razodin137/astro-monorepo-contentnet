@@ -1,0 +1,38 @@
+export const title = "Stay Updated";
+
+<div class="newsletter-fragment">
+  ### {title}
+  
+  Join over **5,000+ developers** who receive our weekly deep dives into the latest technology trends.
+  
+  <form class="newsletter-form">
+    <input type="email" placeholder="your@email.com" class="form-control" />
+    <button class="btn btn-primary">Subscribe</button>
+  </form>
+  
+  *No spam, just quality insights. Unsubscribe at any time.*
+</div>
+
+<style>{`
+.newsletter-fragment {
+    background: var(--primary-light, #e0e7ff);
+    padding: 2rem;
+    border-radius: var(--radius-lg, 12px);
+    border: 1px solid var(--primary-color, #6366f1);
+    margin: 2rem 0;
+}
+.newsletter-fragment h3 {
+    margin-top: 0 !important;
+    color: var(--primary-color, #6366f1) !important;
+}
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+@media (max-width: 500px) {
+    .newsletter-form {
+        flex-direction: column;
+    }
+}
+`}</style>

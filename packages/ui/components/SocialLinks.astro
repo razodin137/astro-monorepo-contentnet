@@ -1,0 +1,117 @@
+---
+/**
+ * SocialLinks Component
+ * 
+ * Usage:
+ * <SocialLinks links={[
+ *   { platform: 'twitter', url: 'https://twitter.com/you', label: '@you' },
+ *   { platform: 'github', url: 'https://github.com/you' },
+ *   { platform: 'linkedin', url: 'https://linkedin.com/in/you' },
+ * ]} />
+ * 
+ * Supported platforms: twitter, github, linkedin, youtube, instagram, email
+ */
+
+interface SocialLink {
+    platform: 'twitter' | 'github' | 'linkedin' | 'youtube' | 'instagram' | 'email' | 'website';
+    url: string;
+    label?: string;
+}
+
+interface Props {
+    links?: SocialLink[];
+    showLabels?: boolean;
+    size?: 'sm' | 'md' | 'lg';
+}
+
+const { 
+    links = [], 
+    showLabels = false,
+    size = 'md'
+} = Astro.props;
+
+// Default icons for each platform
+const icons: Record<string, string> = {
+    twitter: '𝕏',
+    github: '⌂',
+    linkedin: 'in',
+    youtube: '▶',
+    instagram: '📷',
+    email: '✉',
+    website: '🌐'
+};
+---
+
+{links.length > 0 && (
+    <div class={`social-links social-links-${size}`}>
+        {links.map(link => (
+            <a 
+                href={link.url} 
+                aria-label={link.label || link.platform}
+                class="social-link"
+                target={link.platform === 'email' ? undefined : '_blank'}
+                rel={link.platform === 'email' ? undefined : 'noopener noreferrer'}
+            >
+                <span class="social-icon">{icons[link.platform] || '🔗'}</span>
+                {showLabels && link.label && <span class="social-label">{link.label}</span>}
+            </a>
+        ))}
+    </div>
+)}
+
+<style>
+.social-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--social-bg, rgba(255,255,255,0.1));
+    border-radius: 50%;
+    color: var(--social-color, #fff);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+}
+.social-link:hover {
+    background: var(--social-hover-bg, var(--primary-color, #6366f1));
+    transform: translateY(-2px);
+    color: var(--social-hover-color, #fff);
+}
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.social-label {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Sizes */
+.social-links-sm .social-link {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+}
+.social-links-md .social-link {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+}
+.social-links-lg .social-link {
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+}
+
+/* With labels, make them pill-shaped */
+.social-link:has(.social-label) {
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    width: auto;
+    height: auto;
+}
+</style>

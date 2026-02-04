@@ -41,19 +41,101 @@ Centralized UI:
 
 By default, theming is going to be handled by each /apps's /styles/theme.css file.
 
-### Downloading Astro Themes
+### Using External Astro Themes
 
-**--WARNING: All content will have to be adjusted manually when using Astro themes from other creators. You'll have to look into that theme's way of handling content.--**
+You can clone any Astro theme into `/apps` and wire it up to Ghost in a few steps.
 
-If you decide from the beginning that you want the site to have a unique Astro theme that you found, that theme is essentially going to be a new /app
+#### Step 1: Clone the Theme
 
-Simply git clone the theme into your /apps directory.
+```bash
+cd apps
+git clone https://github.com/someone/cool-astro-theme.git my-new-site
+rm -rf my-new-site/.git  # Disconnect from original repo
+```
 
-That's going to create a totally new way of handling everything, and you won't have access to our shared scripts, UI, or anything else unless you build it into that theme yourself. 
+#### Step 2: Copy the Astro Config
 
-Feel free to create a new site based on a theme. New theme, new /app. 
+Replace the theme's `astro.config.mjs` with ours (or merge if the theme has custom integrations):
 
-- Just keep in mind that it's going to be a bit more manual in terms of getting it to play nice with our EXISTING tools, whereas the Theme itself will of course provide some guardrails to handle its own functionality. 
+```bash
+cp apps/_site-template/astro.config.mjs apps/my-new-site/astro.config.mjs
+```
+
+If the theme has custom integrations (like Tailwind), merge them:
+
+```javascript
+// apps/my-new-site/astro.config.mjs
+import { defineConfig } from 'astro/config';
+import { createSiteConfig } from '@my-network/config';
+import mdx from '@astrojs/mdx';
+import tailwind from '@astrojs/tailwind';  // Keep theme's integrations
+
+export default defineConfig(createSiteConfig({
+    integrations: [mdx(), tailwind()]  // Merge integrations here
+}));
+```
+
+#### Step 3: Update package.json
+
+Add our dependencies and siteConfig to the theme's `package.json`:
+
+```json
+{
+    "name": "my-new-site",
+    "type": "module",
+    "dependencies": {
+        "@my-network/api": "*",
+        "@my-network/config": "*",
+        "@my-network/ui": "*",
+        "astro": "^5.17.1"
+    },
+    "siteConfig": {
+        "tag": "site-my-new-site",
+        "title": "My New Site"
+    }
+}
+```
+
+> **Tip:** Keep any existing dependencies the theme needs (like `@astrojs/tailwind`).
+
+#### Step 4: Add a Ghost-Powered Blog Page
+
+Copy our blog page template:
+
+```bash
+cp apps/_site-template/src/pages/blog.astro apps/my-new-site/src/pages/blog.astro
+```
+
+Or create your own using the Ghost API:
+
+```astro
+---
+import { getSiteContent } from '@my-network/api';
+
+const posts = await getSiteContent();  // Auto-filters by siteConfig.tag
+---
+
+<h1>Blog</h1>
+{posts.map(post => <article>{post.title}</article>)}
+```
+
+#### Step 5: Install & Run
+
+```bash
+cd ../..              # Back to monorepo root
+npm install           # Links the new site to shared packages
+npm run dev           # Start all sites
+```
+
+Your new themed site will now pull content from Ghost based on its `siteConfig.tag`!
+
+### How the Integration Works
+
+The `@my-network/config` package reads from your site's `package.json`:
+- `siteConfig.tag` → Used by the Ghost API to filter posts
+- `siteConfig.title` → Available as `import.meta.env.SITE_TITLE`
+
+Ghost credentials (`PUBLIC_GHOST_URL`, `PUBLIC_GHOST_KEY`) are loaded from the root `.env` file automatically. 
 
 # Viewing Your Content
 

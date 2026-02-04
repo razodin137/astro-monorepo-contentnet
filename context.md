@@ -133,3 +133,89 @@ const posts = await getSiteContent();
     </div>
   </body>
 </html>
+
+---
+
+## Adding External Astro Themes to the Network
+
+You can clone any Astro theme into `/apps` and make it "Ghost-aware" in 3 steps:
+
+### Step 1: Clone the Theme
+
+```bash
+cd apps
+git clone https://github.com/some-user/cool-astro-theme.git my-new-site
+rm -rf my-new-site/.git  # Disconnect from original repo
+```
+
+### Step 2: Update `package.json`
+
+Replace or merge the theme's `package.json` with these required fields:
+
+```json
+{
+    "name": "my-new-site",
+    "type": "module",
+    "dependencies": {
+        "@my-network/api": "*",
+        "@my-network/config": "*",
+        "@my-network/ui": "*",
+        "astro": "^5.17.1"
+    },
+    "siteConfig": {
+        "tag": "site-my-new-site",
+        "title": "My New Site Title"
+    }
+}
+```
+
+### Step 3: Update `astro.config.mjs`
+
+Replace or merge the theme's config to use `createSiteConfig()`:
+
+```javascript
+import { defineConfig } from 'astro/config';
+import { createSiteConfig } from '@my-network/config';
+
+// Wrap your existing config with createSiteConfig()
+export default defineConfig(createSiteConfig({
+    // Keep existing integrations, e.g.:
+    // integrations: [mdx(), tailwind()]
+}));
+```
+
+### Step 4: Add a Ghost-Powered Page
+
+Create or modify any page to fetch from Ghost:
+
+```astro
+---
+// src/pages/blog.astro
+import { getSiteContent } from '@my-network/api';
+
+const posts = await getSiteContent();  // Auto-filters by siteConfig.tag
+---
+
+<h1>Blog</h1>
+{posts.map(post => <article>{post.title}</article>)}
+```
+
+### Step 5: Install & Build
+
+```bash
+cd ../../                # Back to monorepo root
+npm install              # Links the new site
+npm run build -w my-new-site  # Build just this site
+```
+
+---
+
+## How It Works
+
+The `@my-network/config` package does the magic:
+
+1. Reads `package.json → siteConfig.tag` and `siteConfig.title`
+2. Loads `.env` from the monorepo root (`PUBLIC_GHOST_URL`, `PUBLIC_GHOST_KEY`)
+3. Injects these as `import.meta.env.*` via Vite's `define` option
+
+The `@my-network/api` package then uses `import.meta.env.SITE_TAG` to filter posts automatically.

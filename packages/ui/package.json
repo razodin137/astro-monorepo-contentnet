@@ -4,10 +4,14 @@
     "exports": {
         "./Card.astro": "./components/Card.astro",
         "./Header.astro": "./components/Header.astro",
+        "./Footer.astro": "./components/Footer.astro",
+        "./SocialLinks.astro": "./components/SocialLinks.astro",
+        "./Newsletter.mdx": "./components/Newsletter.mdx",
+        "./ContactInfo.mdx": "./components/ContactInfo.mdx",
         "./BaseLayout.astro": "./layouts/BaseLayout.astro",
         "./MarkdownLayout.astro": "./layouts/MarkdownLayout.astro"
     },
     "peerDependencies": {
-        "astro": "^4.0.0"
+        "astro": "^4.0.0 || ^5.0.0"
     }
 }

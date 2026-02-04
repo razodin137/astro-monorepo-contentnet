@@ -10,9 +10,11 @@
         "astro": "astro"
     },
     "dependencies": {
-        "astro": "^4.0.0",
+        "@astrojs/mdx": "^4.3.13",
         "@my-network/api": "*",
-        "@my-network/ui": "*"
+        "@my-network/config": "*",
+        "@my-network/ui": "*",
+        "astro": "^5.17.1"
     },
     "siteConfig": {
         "tag": "SITE-EXAMPLE-TAG",

@@ -1,49 +1,110 @@
 ---
 import Header from '../components/Header.astro';
-const { title, siteTitle = "Astro Site" } = Astro.props;
+import Footer from '../components/Footer.astro';
+
+/**
+ * BaseLayout - The main page wrapper
+ * 
+ * Props:
+ * - title: Page title
+ * - siteTitle: Site name (shown in header/footer)
+ * - description: Meta description
+ * - navLinks: Custom header navigation
+ * - footerLinks: Custom footer quick links
+ * - socialLinks: Custom social media links
+ * - aboutText: Custom footer about text
+ */
+
+interface NavLink {
+    href: string;
+    label: string;
+}
+
+interface SocialLink {
+    platform: 'twitter' | 'github' | 'linkedin' | 'youtube' | 'instagram' | 'email' | 'website';
+    url: string;
+    label?: string;
+}
+
+interface Props {
+    title?: string;
+    siteTitle?: string;
+    description?: string;
+    navLinks?: NavLink[];
+    footerLinks?: NavLink[];
+    socialLinks?: SocialLink[];
+    aboutText?: string;
+}
+
+const { 
+    title, 
+    siteTitle = "Astro Site", 
+    description = "",
+    navLinks,
+    footerLinks,
+    socialLinks,
+    aboutText
+} = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} | {siteTitle}</title>
+    <meta name="description" content={description}>
+    <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
     <slot name="head" />
 </head>
 <body>
-    <Header title={siteTitle} />
+    <Header title={siteTitle} navLinks={navLinks} />
     <main>
         <slot />
     </main>
-    <footer>
-        <p>&copy; {new Date().getFullYear()} {siteTitle} | <a href="/legal">Legal</a></p>
-    </footer>
+    <Footer 
+        siteTitle={siteTitle} 
+        quickLinks={footerLinks} 
+        socialLinks={socialLinks}
+        aboutText={aboutText}
+    />
 </body>
 </html>
 
 <style is:global>
 :root {
-    --font-base: system-ui, -apple-system, sans-serif;
+    --font-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --text-color: #1a1a2e;
+    --text-muted: #64748b;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+}
+* {
+    box-sizing: border-box;
 }
 body {
     font-family: var(--font-base);
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    color: var(--text-color);
+    background: var(--bg-color);
 }
 main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
+    min-height: 60vh;
 }
-footer {
-    text-align: center;
-    padding: 2rem;
-    background: #f4f4f4;
-    margin-top: 2rem;
+a {
+    color: var(--primary-color);
 }
-footer a {
-    color: inherit;
-    text-decoration: underline;
+a:hover {
+    color: var(--primary-hover);
+}
+img {
+    max-width: 100%;
+    height: auto;
 }
 </style>

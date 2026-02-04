@@ -1,0 +1,165 @@
+---
+import SocialLinks from './SocialLinks.astro';
+
+/**
+ * Footer Component
+ * 
+ * Props:
+ * - siteTitle: Copyright line title
+ * - aboutText: Custom "About" section text
+ * - quickLinks: Array of { href, label } for footer links
+ * - socialLinks: Array of { platform, url, label } for social icons
+ * 
+ * Usage with custom content:
+ * <Footer 
+ *   siteTitle="My Site"
+ *   aboutText="My custom about text here."
+ *   quickLinks={[
+ *     { href: '/', label: 'Home' },
+ *     { href: '/shop', label: 'Shop' },
+ *   ]}
+ *   socialLinks={[
+ *     { platform: 'twitter', url: 'https://twitter.com/me' },
+ *     { platform: 'github', url: 'https://github.com/me' },
+ *   ]}
+ * />
+ */
+
+interface FooterLink {
+    href: string;
+    label: string;
+}
+
+interface SocialLink {
+    platform: 'twitter' | 'github' | 'linkedin' | 'youtube' | 'instagram' | 'email' | 'website';
+    url: string;
+    label?: string;
+}
+
+interface Props {
+    siteTitle?: string;
+    aboutText?: string;
+    quickLinks?: FooterLink[];
+    socialLinks?: SocialLink[];
+}
+
+const { 
+    siteTitle = "Astro Site",
+    aboutText = "A modern, flexible theme built with Astro. Customize everything with simple CSS variables.",
+    quickLinks,
+    socialLinks
+} = Astro.props;
+
+// Default links if none provided
+const defaultQuickLinks: FooterLink[] = [
+    { href: '/', label: 'Home' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/features', label: 'Features' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+];
+
+const defaultSocialLinks: SocialLink[] = [
+    { platform: 'twitter', url: '#' },
+    { platform: 'github', url: '#' },
+    { platform: 'linkedin', url: '#' },
+];
+
+const links = quickLinks || defaultQuickLinks;
+const socials = socialLinks || defaultSocialLinks;
+---
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>About</h4>
+            <p>{aboutText}</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                {links.map(link => (
+                    <li><a href={link.href}>{link.label}</a></li>
+                ))}
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Connect</h4>
+            <SocialLinks links={socials} />
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; {new Date().getFullYear()} {siteTitle} | <a href="/legal">Legal</a></p>
+    </div>
+</footer>
+
+<style>
+.site-footer {
+    background: var(--footer-bg, #1a1a2e);
+    color: var(--footer-text, #e0e0e0);
+    padding: 3rem 1rem 1rem;
+    margin-top: 3rem;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+.footer-section h4 {
+    color: var(--footer-heading, #fff);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+.footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-section li {
+    margin-bottom: 0.5rem;
+}
+.footer-section a {
+    color: var(--footer-link, #a0a0ff);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-section a:hover {
+    color: var(--footer-link-hover, #fff);
+}
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--footer-social-bg, #2a2a4e);
+    border-radius: 50%;
+    font-size: 1.1rem;
+    transition: background 0.2s, transform 0.2s;
+}
+.social-links a:hover {
+    background: var(--primary-color, #6366f1);
+    transform: translateY(-2px);
+}
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--footer-border, #333);
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+.footer-bottom a {
+    color: inherit;
+}
+</style>

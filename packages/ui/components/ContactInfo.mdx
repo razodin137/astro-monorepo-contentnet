@@ -1,0 +1,35 @@
+import SocialLinks from './SocialLinks.astro';
+
+<div class="contact-info-fragment">
+  
+  Looking for professional support or have a technical question? Our team is available **Monday - Friday, 9am - 5pm EST**.
+  
+  ### Direct Contact
+  - **Email**: [support@example.com](mailto:support@example.com)
+  - **Phone**: +1 (555) 123-4567
+  
+  ### Follow Our Updates
+  
+  <div style={{ marginTop: '1rem' }}>
+    <SocialLinks links={[
+        { platform: 'twitter', url: 'https://twitter.com/example' },
+        { platform: 'github', url: 'https://github.com/example' },
+        { platform: 'linkedin', url: 'https://linkedin.com/company/example' }
+    ]} />
+  </div>
+
+</div>
+
+<style>{`
+.contact-info-fragment h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+.contact-info-fragment ul {
+    list-style: none;
+    padding: 0;
+}
+.contact-info-fragment li {
+    margin-bottom: 0.5rem;
+}
+`}</style>
