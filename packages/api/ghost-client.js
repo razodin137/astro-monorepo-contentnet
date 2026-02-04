@@ -2,8 +2,8 @@ import GhostContentAPI from "@tryghost/content-api";
 
 // 1. Initialize the API once
 const api = new GhostContentAPI({
-    url: 'https://demo.ghost.io', // Using demo for now as per context instructions or fallback
-    key: '22444f78447824223cefc48062', // Demo key
+    url: import.meta.env.PUBLIC_GHOST_URL || 'https://demo.ghost.io',
+    key: import.meta.env.PUBLIC_GHOST_KEY,
     version: "v5.0"
 });
 
