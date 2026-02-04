@@ -2,18 +2,7 @@
 
 - Uses Astro and Turbo to manage multiple sites
 
-##### Content
-
-- Calls to Ghost-CMS via the Admin and Content APIs
-
-##### UI and Theming
-
-Centralized UI:
-- UI components are centralized in /packages/ui and are shared across ALL sites.
-- Headers, footers, html forms, newsletter signups: this stuff can live in /packages/ui.
-
-Customized Themes:
-- Each site has its own theme and configuration in the form of a simple /styles/theme.css file.
+Simply clone this repo to serve as your local devlopment environment for creating an Astro multisite. 
 
 ### Creating a NEW Site
 
@@ -31,22 +20,39 @@ But as far as making a new site is concerned, it's mostly *copy-paste!*
 
 All you need for that brand new site is a new **package.json** file. It's in the template you just copy-pasted. **Simply update package.json with your *new title* and *new tag.***
 
+# Content
+
+- Calls to Ghost-CMS via the Admin and Content APIs
+
+- Content can also be written in pure markdown by simply placing it in the /src/pages folder of each site. 
+> To add in ***Javascript*** functionality to your existing markdown files, you can change the .md extension to a .mdx file. Check the Astro documentation for more details on .mdx files. You might use this if you want to add some javascript newsletter signup to your .md files. 
+
+# UI
+
+Centralized UI:
+- UI components are centralized in /packages/ui and are shared across ALL sites.
+- Headers, footers, html forms, newsletter signups: this stuff can live in /packages/ui.
+
 ---
 
-### Theming
+# Theming
+
+- Each site has its own theme and configuration in the form of a simple /styles/theme.css file.
 
 By default, theming is going to be handled by each /apps's /styles/theme.css file.
 
-However, if you decide from the beginning that you want the site to have a unique Astro theme that you found, that theme is essentially going to be a new /app
+### Downloading Astro Themes
 
-For example, I've been copy-pasting my _site-template folder same as before. 
-- For this theme, we're going to skip that.
+**--WARNING: All content will have to be adjusted manually when using Astro themes from other creators. You'll have to look into that theme's way of handling content.--**
+
+If you decide from the beginning that you want the site to have a unique Astro theme that you found, that theme is essentially going to be a new /app
 
 Simply git clone the theme into your /apps directory.
 
 That's going to create a totally new way of handling everything, and you won't have access to our shared scripts, UI, or anything else unless you build it into that theme yourself. 
 
 Feel free to create a new site based on a theme. New theme, new /app. 
+
 - Just keep in mind that it's going to be a bit more manual in terms of getting it to play nice with our EXISTING tools, whereas the Theme itself will of course provide some guardrails to handle its own functionality. 
 
 # Viewing Your Content
@@ -57,9 +63,14 @@ To view this locally, simply clone the repo, and run:
 npm run dev
 ```
 
+This will build all sites in the /apps directory and give each a unique /localhost port to view them on your machine. 
+
+---
+
 To see a static build of the site, run:
 
 
 ```
 npm run build
 ```
+Each site will have static files appear in its own unique /dist directory.
