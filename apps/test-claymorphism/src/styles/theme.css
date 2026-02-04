@@ -1,0 +1,369 @@
+/* ========================================
+   CLAYMORPHISM THEME CONFIGURATION
+   Soft, rounded, inflated "clay" look.
+   ======================================== */
+
+:root {
+    /* Primary Colors - Soft & Pastel */
+    --primary-color: #7d8aff;
+    --primary-hover: #9ca6ff;
+    --primary-light: #e0e5ff;
+
+    /* Backgrounds */
+    --bg-color: #f0f4f8;
+    --clay-bg: #ffffff;
+
+    /* Header & Footer */
+    --header-bg: #7d8aff;
+    --header-text: #ffffff;
+    --header-link: #f0f4f8;
+    --header-link-hover: #ffffff;
+    --footer-bg: #2d3436;
+    --footer-text: #dfe6e9;
+    --footer-heading: #ffffff;
+    --footer-link: #7d8aff;
+    --footer-link-hover: #ffffff;
+    --footer-social-bg: #3d4446;
+    --footer-border: #4d5456;
+
+    /* Text */
+    --text-color: #2d3436;
+    --text-muted: #636e72;
+    --card-bg: #ffffff;
+    --border-color: rgba(255, 255, 255, 0.5);
+
+    /* Typography */
+    --font-base: 'Outfit', 'Inter', system-ui, sans-serif;
+    --font-heading: 'Outfit', 'Inter', sans-serif;
+
+    /* Spacing */
+    --section-padding: 5rem 1rem;
+    --container-max: 1200px;
+
+    /* Claymorphism Effects */
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 35px;
+    --radius-full: 100px;
+
+    /* Clay Shadows: Inner light top-left, Inner dark bottom-right, Outer soft shadow */
+    --clay-shadow-sm:
+        inset 4px 4px 8px rgba(255, 255, 255, 0.8),
+        inset -4px -4px 8px rgba(0, 0, 0, 0.05),
+        8px 8px 16px rgba(0, 0, 0, 0.1);
+
+    --clay-shadow-md:
+        inset 8px 8px 16px rgba(255, 255, 255, 0.8),
+        inset -8px -8px 16px rgba(0, 0, 0, 0.05),
+        16px 16px 32px rgba(0, 0, 0, 0.1);
+
+    --clay-shadow-lg:
+        inset 12px 12px 24px rgba(255, 255, 255, 0.8),
+        inset -12px -12px 24px rgba(0, 0, 0, 0.05),
+        24px 24px 48px rgba(0, 0, 0, 0.1);
+
+    --primary-clay-shadow:
+        inset 8px 8px 16px rgba(255, 255, 255, 0.4),
+        inset -8px -8px 16px rgba(0, 0, 0, 0.1),
+        16px 16px 32px rgba(125, 138, 255, 0.3);
+
+    /* Aliases for Generic Components to use Clay styles */
+    --shadow-sm: var(--clay-shadow-sm);
+    --shadow-md: var(--clay-shadow-md);
+    --shadow-lg: var(--clay-shadow-lg);
+    --border-width: 0px;
+}
+
+/* ========================================
+   GLOBAL OVERRIDES
+   ======================================== */
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-base);
+    line-height: 1.6;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.section {
+    padding: var(--section-padding);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: var(--primary-clay-shadow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        inset 10px 10px 20px rgba(255, 255, 255, 0.5),
+        inset -10px -10px 20px rgba(0, 0, 0, 0.15),
+        20px 20px 40px rgba(125, 138, 255, 0.4);
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #fff;
+    color: var(--primary-color);
+    box-shadow: var(--clay-shadow-sm);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--clay-shadow-md);
+    background: #fff;
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+.hero {
+    background: linear-gradient(135deg, #a29bfe 0%, #74b9ff 100%);
+    color: #fff;
+    padding: 7rem 1.5rem;
+    text-align: center;
+    margin: 0 1rem 4rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--clay-shadow-lg);
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.hero p {
+    font-size: 1.35rem;
+    font-weight: 500;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    opacity: 0.95;
+}
+
+/* ========================================
+   FEATURE GRID
+   ======================================== */
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin: 3rem 0;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: var(--clay-shadow-md);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--clay-shadow-lg);
+}
+
+.feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 1rem;
+    background: #f8faff;
+    border-radius: var(--radius-md);
+    box-shadow: var(--clay-shadow-sm);
+}
+
+.feature-card h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* ========================================
+   CARDS
+   ======================================== */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+/* ========================================
+   FORMS
+   ======================================== */
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    padding-left: 0.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    border-radius: var(--radius-md);
+    box-shadow: var(--clay-shadow-sm);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: var(--clay-shadow-md);
+    transform: scale(1.01);
+}
+
+textarea.form-control {
+    min-height: 180px;
+    border-radius: var(--radius-md);
+}
+
+/* ========================================
+   SECTION HEADERS
+   ======================================== */
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   PROSE / CONTENT
+   ======================================== */
+
+.prose {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 4rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--clay-shadow-md);
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+    font-weight: 800;
+    color: var(--text-color);
+    margin-top: 2.5rem;
+}
+
+.prose blockquote {
+    background: #f8faff;
+    border-radius: var(--radius-md);
+    padding: 2.5rem;
+    margin: 2.5rem 0;
+    box-shadow: var(--clay-shadow-sm);
+    border-left: 8px solid var(--primary-color);
+}
+
+/* ========================================
+   FEATURE SHOWCASE (Specific to features.mdx)
+   ======================================== */
+
+.showcase-box {
+    background: var(--card-bg) !important;
+    border: none !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--clay-shadow-md) !important;
+}
+
+.color-swatch {
+    border: none !important;
+    box-shadow: var(--clay-shadow-sm) !important;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 5rem 1.5rem;
+        margin: 0 0 3rem;
+        border-radius: 0;
+    }
+
+    .prose {
+        padding: 2rem 1.5rem;
+        box-shadow: none;
+        background: transparent;
+    }
+}

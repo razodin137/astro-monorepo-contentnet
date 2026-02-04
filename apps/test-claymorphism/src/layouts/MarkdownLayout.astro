@@ -1,0 +1,8 @@
+---
+import MdLayout from '@my-network/ui/MarkdownLayout.astro';
+import '../styles/theme.css';
+const props = Astro.props;
+---
+<MdLayout {...props}>
+    <slot />
+</MdLayout>

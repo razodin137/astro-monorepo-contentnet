@@ -1,6 +1,7 @@
 import GhostContentAPI from "@tryghost/content-api";
 
 // 1. Initialize the API once
+// You'll want to update the values in your /.env file
 const api = new GhostContentAPI({
     url: import.meta.env.PUBLIC_GHOST_URL || 'https://demo.ghost.io',
     key: import.meta.env.PUBLIC_GHOST_KEY,
@@ -22,10 +23,25 @@ export async function getSiteContent() {
     try {
         return await api.posts.browse({
             filter: `tag:${currentTag}`,
-            include: "tags,authors"
+            include: "tags,authors",
+            formats: ['html']
         });
     } catch (err) {
         console.error(`Error fetching content for tag ${currentTag}:`, err);
         return [];
     }
 }
+
+export async function getPostBySlug(slug) {
+    try {
+        return await api.posts.read({
+            slug,
+            include: "tags,authors",
+            formats: ['html']
+        });
+    } catch (err) {
+        console.error(`Error fetching post with slug ${slug}:`, err);
+        return null;
+    }
+}
+

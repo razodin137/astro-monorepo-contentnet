@@ -1,1 +1,1 @@
-export { getSiteContent } from './ghost-client.js';
+export { getSiteContent, getPostBySlug } from './ghost-client.js';

@@ -1,0 +1,74 @@
+---
+import { getSiteContent, getPostBySlug } from '@my-network/api';
+import BaseLayout from '@my-network/ui/BaseLayout.astro';
+import '../styles/theme.css';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getSiteContent();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const siteTitle = import.meta.env.SITE_TITLE || "Starter Theme";
+---
+
+<BaseLayout title={post.title} siteTitle={siteTitle} description={post.excerpt}>
+    <article class="post-content">
+        <header class="section-header">
+            <h1>{post.title}</h1>
+            <div class="post-meta">
+                <span>{new Date(post.published_at).toLocaleDateString()}</span>
+                {post.reading_time && <span> • {post.reading_time} min read</span>}
+            </div>
+        </header>
+
+        {post.feature_image && (
+            <div class="post-image">
+                <img src={post.feature_image} alt={post.title} />
+            </div>
+        )}
+
+        <div class="content" set:html={post.html}></div>
+    </article>
+</BaseLayout>
+
+<style>
+.post-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+.post-meta {
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+.post-image {
+    margin: 2rem 0;
+}
+.post-image img {
+    width: 100%;
+    border-radius: 8px;
+}
+.content {
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+.content :global(p) {
+    margin-bottom: 1.5rem;
+}
+.content :global(h2) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+</style>

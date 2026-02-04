@@ -17,7 +17,7 @@
         "astro": "^5.17.1"
     },
     "siteConfig": {
-        "tag": "SITE-EXAMPLE-TAG",
+        "tag": "site-template",
         "title": "This Is The Title Of Your Site"
     }
 }

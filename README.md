@@ -43,6 +43,20 @@ By default, theming is going to be handled by each /apps's /styles/theme.css fil
 
 ### Using External Astro Themes
 
+
+
+**--WARNING: All content will have to be adjusted manually when using Astro themes from other creators. You'll have to look into that theme's way of handling content.--**
+
+If you decide from the beginning that you want the site to have a unique Astro theme that you found, that theme is essentially going to be a new /app
+
+Simply git clone the theme into your /apps directory.
+
+That's going to create a totally new way of handling everything, and you won't have access to our shared scripts, UI, or anything else unless you build it into that theme yourself. 
+
+Feel free to create a new site based on a theme. New theme, new /app. 
+
+- Just keep in mind that it's going to be a bit more manual in terms of getting it to play nice with our EXISTING tools, whereas the Theme itself will of course provide some guardrails to handle its own functionality. 
+
 You can clone any Astro theme into `/apps` and wire it up to Ghost in a few steps.
 
 #### Step 1: Clone the Theme

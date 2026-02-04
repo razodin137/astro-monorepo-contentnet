@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import '../ghost-content.css';
 
 /**
  * BaseLayout - The main page wrapper
@@ -54,6 +55,16 @@ const {
     <meta name="description" content={description}>
     <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
     <slot name="head" />
+    {import.meta.env.PUBLIC_GHOST_URL && (
+        <script 
+            defer 
+            src="https://unpkg.com/@tryghost/portal@latest/umd/portal.min.js" 
+            data-ghost={import.meta.env.PUBLIC_GHOST_URL} 
+            data-key={import.meta.env.PUBLIC_GHOST_KEY} 
+            data-api={`${import.meta.env.PUBLIC_GHOST_URL}/ghost/api/content/`} 
+            crossorigin="anonymous"
+        ></script>
+    )}
 </head>
 <body>
     <Header title={siteTitle} navLinks={navLinks} />
