@@ -35,35 +35,19 @@ All you need for that brand new site is a new **package.json** file. It's in the
 
 ### Theming
 
-The monorepo supports a **hybrid theme system** for flexibility.
+By default, theming is going to be handled by each /apps's /styles/theme.css file.
 
-#### Shared Themes (`packages/themes/`)
+However, if you decide from the beginning that you want the site to have a unique Astro theme that you found, that theme is essentially going to be a new /app
 
-Themes in `packages/themes/` are shared across all sites. To use a shared theme:
+For example, I've been copy-pasting my _site-template folder same as before. 
+- For this theme, we're going to skip that.
 
-1. Set `siteConfig.theme` in your site's `package.json`:
-   ```json
-   "siteConfig": {
-       "theme": "default"
-   }
-   ```
-2. Add the theme dependency: `"@my-network/themes-default": "*"`
-3. Import from `@theme` in your pages:
-   ```astro
-   import Layout from '@theme/layouts/Base.astro';
-   import Card from '@theme/components/Card.astro';
-   ```
+Simply git clone the theme into your /apps directory.
 
-#### Local Theme Override (`src/themes/`)
+That's going to create a totally new way of handling everything, and you won't have access to our shared scripts, UI, or anything else unless you build it into that theme yourself. 
 
-To customize a theme for a single site without affecting others:
-
-1. Create a folder: `src/themes/{theme-name}/`
-2. Add your custom layouts/components there.
-3. The site will automatically use the local version instead of the shared package.
-
-This gives you the best of both worlds: shared themes for consistency, with an escape hatch for per-site customization.
-
+Feel free to create a new site based on a theme. New theme, new /app. 
+- Just keep in mind that it's going to be a bit more manual in terms of getting it to play nice with our EXISTING tools, whereas the Theme itself will of course provide some guardrails to handle its own functionality. 
 
 # Viewing Your Content
 
