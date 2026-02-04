@@ -1,0 +1,90 @@
+---
+import Header from '@my-network/ui/Header.astro';
+import Footer from '@my-network/ui/Footer.astro';
+import { siteInfo, navLinks, footerLinks, socialLinks } from '../site.config';
+import '@my-network/ui/ghost-content.css';
+import '../styles/theme.css';
+
+interface Props {
+    title?: string;
+    siteTitle?: string;
+    description?: string;
+}
+
+const { 
+    title, 
+    siteTitle = siteInfo.title, 
+    description = siteInfo.description,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content={description}>
+    <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
+    <slot name="head" />
+    {import.meta.env.PUBLIC_GHOST_URL && (
+        <script 
+            defer 
+            src="https://unpkg.com/@tryghost/portal@latest/umd/portal.min.js" 
+            data-ghost={import.meta.env.PUBLIC_GHOST_URL} 
+            data-key={import.meta.env.PUBLIC_GHOST_KEY} 
+            data-api={`${import.meta.env.PUBLIC_GHOST_URL}/ghost/api/content/`} 
+            crossorigin="anonymous"
+        ></script>
+    )}
+</head>
+<body>
+    <div class="layout-wrapper">
+        <Header title={siteTitle} navLinks={navLinks} />
+        <main>
+            <slot />
+        </main>
+        <Footer 
+            siteTitle={siteTitle} 
+            quickLinks={footerLinks} 
+            socialLinks={socialLinks}
+        />
+    </div>
+</body>
+</html>
+
+<style is:global>
+    /* Basic reset and base styles normally handled by theme.css, 
+       but we ensure full height layout here */
+    
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: var(--font-base, system-ui, sans-serif);
+        background: var(--bg-color, #f8fafc);
+        color: var(--text-color, #1a1a2e);
+        line-height: 1.6;
+    }
+
+    .layout-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    main {
+        flex: 1;
+        width: 100%;
+        max-width: var(--container-max, 1200px);
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    /* Images responsiveness */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>

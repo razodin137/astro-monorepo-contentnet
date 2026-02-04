@@ -20,6 +20,15 @@ But as far as making a new site is concerned, it's mostly *copy-paste!*
 
 All you need for that brand new site is a new **package.json** file. It's in the template you just copy-pasted. **Simply update package.json with your *new title* and *new tag.***
 
+### Configuring Your Site
+
+Each site template comes with a `src/site.config.ts` file. This is where you manage:
+- **Navigation Links**: Customize your header menu.
+- **Footer Links**: Add quick links to the footer.
+- **Social Media**: Add your profiles (GitHub, Twitter, etc.).
+
+This allows you to control the content of your global Header and Footer without touching the code.
+
 # Content
 
 - Calls to Ghost-CMS via the Admin and Content APIs
