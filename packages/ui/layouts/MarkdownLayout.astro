@@ -1,0 +1,28 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { frontmatter } = Astro.props;
+const siteTitle = import.meta.env.SITE_TITLE || "Astro Site";
+---
+<BaseLayout title={frontmatter.title} siteTitle={siteTitle}>
+    <article class="prose">
+        <h1 class="page-title">{frontmatter.title}</h1>
+        <slot />
+    </article>
+</BaseLayout>
+
+<style>
+.prose {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.page-title {
+    color: var(--header-bg, #333);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+</style>

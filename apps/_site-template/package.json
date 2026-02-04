@@ -1,0 +1,21 @@
+{
+    "name": "YOUR-SITE-NAME",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "astro": "^4.0.0",
+        "@my-network/api": "*",
+        "@my-network/ui": "*"
+    },
+    "siteConfig": {
+        "tag": "SITE-EXAMPLE-TAG",
+        "title": "This Is The Title Of Your Site"
+    }
+}

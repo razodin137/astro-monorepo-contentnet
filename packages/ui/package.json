@@ -1,0 +1,13 @@
+{
+    "name": "@my-network/ui",
+    "version": "0.0.1",
+    "exports": {
+        "./Card.astro": "./components/Card.astro",
+        "./Header.astro": "./components/Header.astro",
+        "./BaseLayout.astro": "./layouts/BaseLayout.astro",
+        "./MarkdownLayout.astro": "./layouts/MarkdownLayout.astro"
+    },
+    "peerDependencies": {
+        "astro": "^4.0.0"
+    }
+}

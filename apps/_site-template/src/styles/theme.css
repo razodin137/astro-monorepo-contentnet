@@ -1,0 +1,10 @@
+:root {
+    --header-bg: #1a237e;
+    /* Tech Blue */
+    --font-base: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    /* Cool Gray */
+}
